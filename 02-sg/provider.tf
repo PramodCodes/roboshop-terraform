@@ -7,7 +7,7 @@ terraform {
   }
     backend "s3" {
     bucket = "pka.in.net"
-    key    = "vpc"
+    key    = "sg"
     region = "us-east-1"
     dynamodb_table = "pka.in.net-state"
   }
