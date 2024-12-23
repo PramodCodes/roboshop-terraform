@@ -6,5 +6,6 @@ module "mongodb" {
     #lets use data source for vpc
     vpc_id = data.aws_ssm_parameter.vpc_id.value
     sg_name = "mongodb"
+    sg_description = "sg for mongodb"
    
 }
