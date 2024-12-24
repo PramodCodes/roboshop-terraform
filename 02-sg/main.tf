@@ -7,5 +7,6 @@ module "mongodb" {
     vpc_id = data.aws_ssm_parameter.vpc_id.value
     sg_name = "mongodb"
     sg_description = "sg for mongodb"
+    sg_ingress_rules = var.mongodb_sg_ingress_rules
    
 }
