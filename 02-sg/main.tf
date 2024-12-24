@@ -149,48 +149,48 @@ resource "aws_security_group_rule" "user_mongodb" {
   security_group_id = module.mongodb.sg_id #adding sg of user in mongodb from user
 }
 
-# resource "aws_security_group_rule" "cart_redis" {
-#   source_security_group_id = module.cart.sg_id 
-#   type              = "ingress"
-#   from_port         = 27017
-#   to_port           = 27017
-#   protocol          = "tcp"
-#   security_group_id = module.redis.sg_id 
-# }
+resource "aws_security_group_rule" "cart_redis" {
+  source_security_group_id = module.cart.sg_id 
+  type              = "ingress"
+  from_port         = 27017
+  to_port           = 27017
+  protocol          = "tcp"
+  security_group_id = module.redis.sg_id 
+}
 
-# resource "aws_security_group_rule" "user_redis" {
-#   source_security_group_id = module.user.sg_id
-#   type              = "ingress"
-#   from_port         = 6379
-#   to_port           = 6379
-#   protocol          = "tcp"
-#   security_group_id = module.redis.sg_id 
-# }
+resource "aws_security_group_rule" "user_redis" {
+  source_security_group_id = module.user.sg_id
+  type              = "ingress"
+  from_port         = 6379
+  to_port           = 6379
+  protocol          = "tcp"
+  security_group_id = module.redis.sg_id 
+}
 
-# # shipping_mysql
-# resource "aws_security_group_rule" "shipping_mysql" {
-#   source_security_group_id = module.shipping.sg_id
-#   type              = "ingress"
-#   from_port         = 6379
-#   to_port           = 6379
-#   protocol          = "tcp"
-#   security_group_id = module.mysql.sg_id 
-# }
-# # ratings_mysql
-# resource "aws_security_group_rule" "ratings_mysql" {
-#   source_security_group_id = module.ratings.sg_id
-#   type              = "ingress"
-#   from_port         = 6379
-#   to_port           = 6379
-#   protocol          = "tcp"
-#   security_group_id = module.mysql.sg_id 
-# }
-# # payment_rabbitmq
-# resource "aws_security_group_rule" "payment_rabbitmq" {
-#   source_security_group_id = module.payment.sg_id 
-#   type              = "ingress"
-#   from_port         = 6379
-#   to_port           = 6379
-#   protocol          = "tcp"
-#   security_group_id = module.rabbitmq.sg_id 
-# }
+# shipping_mysql
+resource "aws_security_group_rule" "shipping_mysql" {
+  source_security_group_id = module.shipping.sg_id
+  type              = "ingress"
+  from_port         = 6379
+  to_port           = 6379
+  protocol          = "tcp"
+  security_group_id = module.mysql.sg_id 
+}
+# ratings_mysql
+resource "aws_security_group_rule" "ratings_mysql" {
+  source_security_group_id = module.ratings.sg_id
+  type              = "ingress"
+  from_port         = 6379
+  to_port           = 6379
+  protocol          = "tcp"
+  security_group_id = module.mysql.sg_id 
+}
+# payment_rabbitmq
+resource "aws_security_group_rule" "payment_rabbitmq" {
+  source_security_group_id = module.payment.sg_id 
+  type              = "ingress"
+  from_port         = 6379
+  to_port           = 6379
+  protocol          = "tcp"
+  security_group_id = module.rabbitmq.sg_id 
+}
