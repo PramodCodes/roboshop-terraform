@@ -3,3 +3,5 @@
 01-vpc/.terraform.*
 02-sg/.terraform/*
 02-sg/.terraform.*
+04-ec2/.terraform/*
+04-ec2/.terraform.*
