@@ -3,5 +3,7 @@
 01-vpc/.terraform.*
 02-sg/.terraform/*
 02-sg/.terraform.*
+03-vpn/.terraform/*
+03-vpn/.terraform.*
 04-ec2/.terraform/*
 04-ec2/.terraform.*
