@@ -146,6 +146,16 @@ resource "aws_security_group_rule" "home_vpn" {
   protocol          = "-1" #"tcp" to allow all ports protocol is -1
   cidr_blocks = ["0.0.0.0/0"] #ideally your home ip address , since we dont have static ip we are using this 
 }
+# mongodb must accept connection from vpn , catalogue and user
+resource "aws_security_group_rule" "vpn_mongodb" {
+  //TODO add name tag seems complicated
+  source_security_group_id = module.open_vpn.sg_id # we are accepting connection from vpn
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = module.mongodb.sg_id #
+}
 
 # since mongo db is allowing connection from catalogue we use name as catalogue_mongodb
 resource "aws_security_group_rule" "catalogue_mongodb" {
