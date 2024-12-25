@@ -19,3 +19,8 @@ variable "environment" {
     default = "dev"
     type = string
 }
+
+variable "zone_name" {
+    default = "pka.in.net"
+    type = string
+}
