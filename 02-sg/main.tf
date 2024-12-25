@@ -1,3 +1,14 @@
+module "open_vpn" {
+    source = "../../terraform-aws-security-group"
+    project_name = var.project_name
+    environment = var.environment
+
+    #lets use data source for vpc
+    vpc_id = data.aws_ssm_parameter.vpc_id.value
+    sg_name = "vpn"
+    sg_description = "sg for vpn"
+    # sg_ingress_rules = var.mongodb_sg_ingress_rules
+}
 module "mongodb" {
     source = "../../terraform-aws-security-group"
     project_name = var.project_name
@@ -125,7 +136,16 @@ module "web" {
 # shipping_mysql
 # ratings_mysql
 # payment_rabbitmq
-
+# first rule is for vpn
+resource "aws_security_group_rule" "home_vpn" {
+  //TODO add name tag seems complicated
+  security_group_id = module.open_vpn.sg_id 
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks = ["0.0.0.0/0"] #ideally your home ip address , since we dont have static ip we are using this 
+}
 
 # since mongo db is allowing connection from catalogue we use name as catalogue_mongodb
 resource "aws_security_group_rule" "catalogue_mongodb" {
