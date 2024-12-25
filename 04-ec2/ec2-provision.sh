@@ -1,8 +1,10 @@
 #!/bin/bash
+set -xe
 echo "Provisioning EC2 instance with ansible"
 cd /tmp
 git clone https://github.com/PramodCodes/roboshop-ansible-roles.git
 cd roboshop-ansible-roles
+echo pwd
 # Array of components
 components=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "web")
 
