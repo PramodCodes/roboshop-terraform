@@ -7,7 +7,8 @@ module "vpn" {
 # if you dont clealy metion .value you wont get the value since its an object you will see error
 # we need sg for vpn before the vpn instance
   subnet_id              = data.aws_subnet.default_vpc_subnet.id
-  user_data = file("openvpn.sh")
+# the following is the user_data script that will be executed on the instance to setup vpn
+  user_data = file("openvpn.sh") # file is a function to load files
   tags = merge(
     var.common_tags,
     {
