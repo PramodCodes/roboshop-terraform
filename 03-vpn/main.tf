@@ -1,19 +1,23 @@
-# module "mongodb" {
-#   source  = "terraform-aws-modules/ec2-instance/aws"
-#   ami = data.aws_ami.Centos8.id
+module "vpn" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "5.7.1"
 
-#   name = "${local.ec2_name}-OpenVpn"
+  ami = data.aws_ami.Centos8.id
 
-#   instance_type          = "t3.small"
-#   vpc_security_group_ids = [data.aws_ssm_parameter.mongodb_sg_id.value]
-# # if you dont clealy metion .value you wont get the value since its an object you will see error
-#   subnet_id              = 
+  name = "${local.ec2_name}-OpenVpn"
 
-#   tags = merge(
-#     var.common_tags,
-#     {
-#         Componenet = "mongodb"
-#     },{
-#         Name = "${local.ec2_name}-mongodb"
-#     })
-# }
+  instance_type          = "t3.small"
+  vpc_security_group_ids = [data.aws_ssm_parameter.default_vpn_sg_id.value]
+# if you dont clealy metion .value you wont get the value since its an object you will see error
+  subnet_id              = data.aws_subnet.default_vpc_subnet.id
+# we need sg for vpn before the vpn instance
+
+
+  tags = merge(
+    var.common_tags,
+    {
+        Componenet = "vpn"
+    },{
+        Name = "${local.ec2_name}-vpn"
+    })
+}
