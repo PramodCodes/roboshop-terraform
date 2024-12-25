@@ -4,7 +4,7 @@ module "open_vpn" {
     environment = var.environment
 
     #lets use data source for vpc
-    vpc_id = data.aws_ssm_parameter.vpc_id.value
+    vpc_id = data.aws_vpc.default_vpc_info.id
     sg_name = "vpn"
     sg_description = "sg for vpn"
     # sg_ingress_rules = var.mongodb_sg_ingress_rules
