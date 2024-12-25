@@ -1,5 +1,5 @@
 #getting latest ami id automatically
-data "aws_ami" "Centos8" {
+data "aws_ami" "centos8" {
     owners = ["973714476881"]
     most_recent = true
     

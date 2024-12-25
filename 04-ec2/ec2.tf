@@ -1,6 +1,6 @@
 module "mongodb" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  ami = data.aws_ami.Centos8.id
+  ami = data.aws_ami.centos8.id
 
   name = "${local.ec2_name}-mongodb"
 
