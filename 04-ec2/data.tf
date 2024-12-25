@@ -70,3 +70,17 @@ data "aws_ssm_parameter" "public_subnets_ids" {
   name = "/${var.project_name}/${var.environment}/public_subnets_ids"
 }
 
+# we will use vpn sg id in ansible because vpn sg has 22 port and ansible needs 22 port
+data "aws_ssm_parameter" "vpn_sg_id" {
+  name  = "/${var.project_name}/${var.environment}/vpn_sg_id"
+}
+
+# data sources for default vpc to ansible usage
+data "aws_vpc" "default_vpc_info" {
+  default = true
+}
+
+data "aws_subnet" "default_vpc_subnet" {
+  vpc_id = data.aws_vpc.default_vpc_info.id
+  availability_zone = "us-east-1a"
+}

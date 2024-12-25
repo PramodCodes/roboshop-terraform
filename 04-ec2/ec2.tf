@@ -176,9 +176,7 @@ module "payment" {
 module "web" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   ami = data.aws_ami.centos8.id
-
   name = "${local.ec2_name}-web"
-
   instance_type          = "t2.micro"
   vpc_security_group_ids = [data.aws_ssm_parameter.web_sg_id.value]
   subnet_id              = local.public_subnet_id
@@ -189,6 +187,27 @@ module "web" {
         Componenet = "web"
     },{
         Name = "${local.ec2_name}-web"
+    })
+}
+
+# configuration layer with ansible
+
+module "ansible" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  ami = data.aws_ami.centos8.id
+  name = "${local.ec2_name}-ansible"
+
+  instance_type          = "t2.micro"
+  vpc_security_group_ids = [data.aws_ssm_parameter.vpn_sg_id.value]
+  # we are creating this in default vpn's 1a subnet
+  subnet_id              = data.aws_subnet.default_vpc_subnet.id
+  user_data = file("ec2-provision.sh")
+  tags = merge(
+    var.common_tags,
+    {
+        Componenet = "ansible"
+    },{
+        Name = "${local.ec2_name}-ansible"
     })
 }
 
