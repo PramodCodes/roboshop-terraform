@@ -157,7 +157,7 @@ resource "aws_security_group_rule" "home_vpn" {
   security_group_id = module.open_vpn.sg_id 
   type              = "ingress"
   from_port         = 0 # chaning port 22 to all ports because we are using vpn which needs 1194 port 
-  to_port           = 0
+  to_port           = 65535
   protocol          = "-1" #"tcp" to allow all ports protocol is -1
   cidr_blocks = ["0.0.0.0/0"] #ideally your home ip address , since we dont have static ip we are using this 
 }

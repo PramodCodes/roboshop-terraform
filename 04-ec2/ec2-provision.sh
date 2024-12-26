@@ -1,5 +1,7 @@
 #!/bin/bash
 set -xe
+rm -rf /tmp/roboshop-ansible-roles*
+sleep 1.5m
 yum install ansible -y
 echo "Provisioning EC2 instance with ansible"
 cd /tmp
