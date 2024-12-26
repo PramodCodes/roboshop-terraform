@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xe
+set -x  # add e for killing the script if any command fails
 rm -rf /tmp/roboshop-ansible-roles*
 sleep 1.5m
 yum install ansible -y
