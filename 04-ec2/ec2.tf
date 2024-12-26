@@ -286,7 +286,22 @@ module "records" {
       type    = "A"
       ttl     = 1
       records = [
+        "${module.web.private_ip}",
+      ]
+    },{
+      name    = ""
+      type    = "A"
+      ttl     = 1
+      records = [
         "${module.web.public_ip}",
+      ]
+    },
+    {
+      name    = "ansible"
+      type    = "A"
+      ttl     = 1
+      records = [
+        "${module.ansible.public_ip}",
       ]
     },
   ]

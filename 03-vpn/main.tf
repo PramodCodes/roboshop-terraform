@@ -19,3 +19,20 @@ module "vpn" {
     }
   )
 }
+
+module "records" {
+  source  = "terraform-aws-modules/route53/aws//modules/records"
+
+  zone_name = "pka.in.net"
+
+  records = [
+    {
+      name    = "vpn"
+      type    = "A"
+      ttl     = 1
+      records = [
+        "${module.vpn.public_ip}",
+      ]
+    },
+  ]
+}
